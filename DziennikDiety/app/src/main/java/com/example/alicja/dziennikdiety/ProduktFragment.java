@@ -6,14 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.alicja.dziennikdiety.dummy.DummyContent;
 import com.example.alicja.dziennikdiety.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -28,7 +28,7 @@ public class ProduktFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private MyProduktRecyclerViewAdapter mAdapter;
+    private ProduktViewAdapter mAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -54,7 +54,7 @@ public class ProduktFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        mAdapter = new MyProduktRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+        mAdapter = new ProduktViewAdapter(getActivity(), DummyContent.ITEMS);
     }
 
     @Override
@@ -62,12 +62,14 @@ public class ProduktFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_produkt_list, container, false);
 
+
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setLayoutManager(new WrapLinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
@@ -93,6 +95,23 @@ public class ProduktFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    public class WrapLinearLayoutManager extends LinearLayoutManager {
+        public WrapLinearLayoutManager(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+            try {
+                super.onLayoutChildren(recycler, state);
+            } catch (IndexOutOfBoundsException e) {
+                Log.e("Error", "IndexOutOfBoundsException in RecyclerView happens");
+            }
+        }
+    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

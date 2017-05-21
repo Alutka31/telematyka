@@ -1,9 +1,12 @@
 package com.example.alicja.dziennikdiety.dummy;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -38,35 +41,77 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Item " + position, "13", "17", "55", "12313", (position%3==0), (position%5==0));
     }
 
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
-    }
 
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    public static class DummyItem implements ParentListItem {
         public final String id;
-        public final String content;
-        public final String details;
+        public final String nazwa;
+        public final String kcal;
+        public final String weglowodany;
+        public final String bialko;
+        public final String tluszcz;
+        public final Boolean gluten;
+        public final Boolean laktoza;
 
-        public DummyItem(String id, String content, String details) {
+        private List<Object> mChildrenItemList;
+
+        public DummyItem(String id, String nazwa, String kcal,
+                         String weglowodany, String bialko, String tluszcz,
+                         Boolean gluten, Boolean laktoza) {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.nazwa = nazwa;
+            this.kcal = kcal;
+            this.weglowodany = weglowodany;
+            this.bialko = bialko;
+            this.tluszcz = tluszcz;
+            this.gluten = gluten;
+            this.laktoza = laktoza;
+            this.mChildrenItemList = new ArrayList<>();
+            this.mChildrenItemList.add(new DummyItemInfo(kcal, weglowodany, bialko, tluszcz, gluten, laktoza));
         }
 
         @Override
         public String toString() {
-            return content;
+            return nazwa;
+        }
+
+        @Override
+        public List<?> getChildItemList() {
+            return mChildrenItemList;
+        }
+
+        public void setChildItemList(List<Object> mChildrenItemList) {
+            this.mChildrenItemList = mChildrenItemList;
+        }
+
+        @Override
+        public boolean isInitiallyExpanded() {
+            return false;
+        }
+    }
+
+    public static class DummyItemInfo {
+        public final String kcal;
+        public final String weglowodany;
+        public final String bialko;
+        public final String tluszcz;
+        public final Boolean gluten;
+        public final Boolean laktoza;
+
+        public DummyItemInfo(String kcal,
+                         String weglowodany, String bialko, String tluszcz,
+                         Boolean gluten, Boolean laktoza) {
+            this.kcal = kcal;
+            this.weglowodany = weglowodany;
+            this.bialko = bialko;
+            this.tluszcz = tluszcz;
+            this.gluten = gluten;
+            this.laktoza = laktoza;
         }
     }
 }

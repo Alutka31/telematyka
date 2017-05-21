@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_id"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/tv_nazwa_produktu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
+        android:layout_toEndOf="@+id/tv_id"
+        android:layout_toRightOf="@+id/tv_id"
+        android:layout_toStartOf="@+id/iv_produkt_info"
+        android:layout_toLeftOf="@+id/iv_produkt_info"
         android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_produkt_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:src="@android:drawable/ic_menu_info_details" />
+</RelativeLayout>
