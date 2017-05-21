@@ -8,6 +8,7 @@
     <string name="limit_kaloriiButton">Limit Kalorii</string>
     <string name="title_activity_kalk_kalorii">Kalkulator kalorii posiłku</string>
     <string name="title_activity_kalk_bmi">Kalkulator BMI</string>
+    <string name="title_activity_kalendarz">Kalendarz</string>
     <string name="Waga">Podaj wagę [kg]:</string>
     <string name="Wzrost">Podaj wzrost [cm]:</string>
     <string name="Kobieta">Kobieta</string>
