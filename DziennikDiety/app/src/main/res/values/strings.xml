@@ -46,6 +46,7 @@
     <string name="title_activity_limit">Limit kalorii</string>
     <string name="title_activity_logowanie">Panel logowania</string>
     <string name="title_activity_dieta_alergie">Alergie pokarmowe</string>
+    <string name="title_activity_baza_produktow">Baza produktów</string>
 
 
 </resources>

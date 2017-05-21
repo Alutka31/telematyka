@@ -8,8 +8,4 @@
     tools:context="com.example.alicja.dziennikdiety.BazaProduktowActivity"
     tools:showIn="@layout/activity_baza_produktow">
 
-    <TextView
-        android:id="@+id/tv_baza_produktow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>

@@ -1,16 +1,16 @@
 package com.example.alicja.dziennikdiety;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
-public class BazaProduktowActivity extends AppCompatActivity {
-    public String tekst = "";
+import com.example.alicja.dziennikdiety.dummy.DummyContent;
+
+public class BazaProduktowActivity extends AppCompatActivity implements ProduktFragment.OnListFragmentInteractionListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +18,16 @@ public class BazaProduktowActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        new Baza(this).execute(TYP.POBIERZ_BAZE);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.lista_produktow, new ProduktFragment());
+        ft.commit();
+        //new Baza(this).execute(TYP.POBIERZ_BAZE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void wyswietl() {
-        TextView tv = (TextView) findViewById(R.id.tv_baza_produktow);
-        tv.setText(tekst);
-    }
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
+    }
 }

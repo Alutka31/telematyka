@@ -98,8 +98,8 @@ class Baza extends AsyncTask<TYP, Void, Void> {
             stmt.setFetchSize(5);
             rs = stmt.executeQuery("SELECT produkty.jedzenie.nazwa FROM produkty.jedzenie");
             rs.first();
-            ((BazaProduktowActivity) ctx).tekst = rs.getString("nazwa");
-            ((BazaProduktowActivity) ctx).wyswietl();
+            //((BazaProduktowActivity) ctx).tekst = rs.getString("nazwa");
+            //((BazaProduktowActivity) ctx).wyswietl();
             Log.d("nazwa", rs.getString(1));
         } catch (SQLException ex) {
             Log.e("mySQL", "SQLException: " + ex.getMessage());
