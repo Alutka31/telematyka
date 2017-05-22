@@ -16,6 +16,7 @@ import com.example.alicja.dziennikdiety.ProduktFragment.OnListFragmentInteractio
 import com.example.alicja.dziennikdiety.dummy.DummyContent;
 import com.example.alicja.dziennikdiety.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,15 +24,18 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class ProduktViewAdapter extends ExpandableRecyclerAdapter<ProduktViewAdapter.ProduktViewHolder, ProduktViewAdapter.ProduktInfoViewHolder> {
+public class ProduktViewAdapter
+        //extends ExpandableListView {
+        extends ExpandableRecyclerAdapter<ProduktViewAdapter.ProduktViewHolder, ProduktViewAdapter.ProduktInfoViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private List<DummyItem> mValues;
     private final LayoutInflater inflater;
     private int num_expanded = 0;
 
     public ProduktViewAdapter(Context ctx, List<DummyItem> items) {
         super(items);
-        mValues = items;
+
+        mValues = new ArrayList<>(items);
         inflater = LayoutInflater.from(ctx);
     }
 
@@ -51,7 +55,7 @@ public class ProduktViewAdapter extends ExpandableRecyclerAdapter<ProduktViewAda
     public void onBindParentViewHolder(ProduktViewHolder produktViewHolder, int i, ParentListItem parentListItem) {
         DummyItem parent = (DummyItem) parentListItem;
         produktViewHolder.mNazwaView.setText(parent.nazwa);
-        produktViewHolder.mIdView.setText(parent.id);
+        produktViewHolder.mIdView.setText(parent.id.toString());
     }
 
     @Override
@@ -93,6 +97,14 @@ public class ProduktViewAdapter extends ExpandableRecyclerAdapter<ProduktViewAda
     public int getItemCount() {
         return mValues.size()+num_expanded;
     }
+
+    public void setData(List<DummyItem> data) {
+        mValues.clear();
+        mValues.addAll(data);
+        //mValues = data;
+        notifyDataSetChanged();
+    }
+
 
     public class ProduktViewHolder extends ParentViewHolder {
         public final View mView;

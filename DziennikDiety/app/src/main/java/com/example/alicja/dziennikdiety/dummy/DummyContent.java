@@ -24,7 +24,7 @@ public class DummyContent {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    //public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
     private static final int COUNT = 25;
 
@@ -37,11 +37,11 @@ public class DummyContent {
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        //ITEM_MAP.put(item.id, item);
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, "13", "17", "55", "12313", (position%3==0), (position%5==0));
+        return new DummyItem(position, "Item " + position, "13", "17", "55", "12313", (position%3==0), (position%5==0));
     }
 
 
@@ -49,7 +49,7 @@ public class DummyContent {
      * A dummy item representing a piece of content.
      */
     public static class DummyItem implements ParentListItem {
-        public final String id;
+        public final Integer id;
         public final String nazwa;
         public final String kcal;
         public final String weglowodany;
@@ -60,7 +60,7 @@ public class DummyContent {
 
         private List<Object> mChildrenItemList;
 
-        public DummyItem(String id, String nazwa, String kcal,
+        public DummyItem(Integer id, String nazwa, String kcal,
                          String weglowodany, String bialko, String tluszcz,
                          Boolean gluten, Boolean laktoza) {
             this.id = id;
