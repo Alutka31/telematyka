@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new Baza(getApplicationContext()).execute(TYP.POLACZ);
+        //new Baza(getApplicationContext()).execute(TYP.POLACZ);
     }
 
     public void click(View view) {

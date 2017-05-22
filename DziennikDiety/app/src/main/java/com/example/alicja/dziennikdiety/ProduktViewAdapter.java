@@ -55,7 +55,7 @@ public class ProduktViewAdapter
     public void onBindParentViewHolder(ProduktViewHolder produktViewHolder, int i, ParentListItem parentListItem) {
         DummyItem parent = (DummyItem) parentListItem;
         produktViewHolder.mNazwaView.setText(parent.nazwa);
-        produktViewHolder.mIdView.setText(parent.id.toString());
+        //produktViewHolder.mIdView.setText(parent.id.toString());
     }
 
     @Override
@@ -108,14 +108,14 @@ public class ProduktViewAdapter
 
     public class ProduktViewHolder extends ParentViewHolder {
         public final View mView;
-        public final TextView mIdView;
+        //public final TextView mIdView;
         public final TextView mNazwaView;
         public DummyItem mItem;
 
         public ProduktViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.tv_id);
+           // mIdView = (TextView) view.findViewById(R.id.tv_id);
             mNazwaView = (TextView) view.findViewById(R.id.tv_nazwa_produktu);
         }
 

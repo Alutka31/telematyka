@@ -5,7 +5,6 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.example.alicja.dziennikdiety.dummy.DummyContent;
-import com.mysql.jdbc.StringUtils;
 
 import java.nio.charset.Charset;
 import java.sql.Connection;
@@ -18,8 +17,18 @@ import java.util.List;
 
 public class Baza2 extends AsyncTaskLoader<List<DummyContent.DummyItem>>{
     private Connection conn;
+
     public Baza2(Context context) {
         super(context);
+        try {
+            // The newInstance() call is a work around for some
+            // broken Java implementations
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            // handle the error
+            Log.e("mySQL", "Driver nie znaleziony: "+ex.toString());
+        }
     }
 
     @Override
@@ -38,7 +47,7 @@ public class Baza2 extends AsyncTaskLoader<List<DummyContent.DummyItem>>{
         cancelLoad();
     }
 
-    private Void polacz() {
+    private void polacz() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://188.68.237.63?" +
                     "user=produkty&password=produkty123");
@@ -49,17 +58,15 @@ public class Baza2 extends AsyncTaskLoader<List<DummyContent.DummyItem>>{
             Log.e("mySQL", "SQLState: " + ex.getSQLState());
             Log.e("mySQL", "VendorError: " + ex.getErrorCode());
         }
-
-        return null;
     }
 
-    private Void rozlacz() {
+    private void rozlacz() {
         try {
             conn.close();
         } catch (Exception ignored) {}
         conn = null;
-        return null;
     }
+
     private List<DummyContent.DummyItem> pobierz_dane() {
         Statement stmt = null;
         ResultSet rs = null;
